@@ -1,0 +1,28 @@
+package com.example.qusrydsl_ex11ver.entity;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@ToString(of={"empId", "empName", "salary"})
+@Table(name = "employees")
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "emp_id")
+    private int empId;
+
+    @Column(name="emp_name", length=10)
+    private String empName;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dept_id")
+    private Department department;
+
+    private int salary;
+}
